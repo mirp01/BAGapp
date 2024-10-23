@@ -1,12 +1,13 @@
 import { StyleSheet, View, Text } from 'react-native';
 import  ButtonPrimary from '@/components/ButtonPrimary';
+import  ButtonCoin from '@/components/ButtonCoin';
 import { Colors } from '@/constants/Colors';
 
 export function MainMenu() {
     return (
         <View style={styles.container}>
             <View>
-                
+                <ButtonCoin />
             </View>
             <View>
                 <ButtonPrimary title = 'profile' hasMargin/>
