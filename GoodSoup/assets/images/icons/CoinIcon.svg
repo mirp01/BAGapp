@@ -1,9 +1,49 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg fill="#FFE81C" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier">
-<path d="M15,22a6,6,0,1,1,6-6A6,6,0,0,1,15,22ZM8.5,8.857c3.038,0,5.5-1.535,5.5-3.428S11.538,2,8.5,2,3,3.535,3,5.429,5.462,8.857,8.5,8.857ZM7.673,12.8a8.018,8.018,0,0,1,1.368-2.119c-.18.011-.356.033-.541.033C5.462,10.714,3,9.179,3,7.286V9.428C3,11.145,5.032,12.549,7.673,12.8Zm-.534,4.656A8.03,8.03,0,0,1,7,16c0-.24.015-.477.036-.712C4.712,14.889,3,13.576,3,12v2.143C3,15.742,4.762,17.077,7.139,17.456ZM8.5,22a8.83,8.83,0,0,0,1.079-.067,5.451,5.451,0,0,1-.673-.762,8.064,8.064,0,0,1-.929-1.345C5.188,19.66,3,18.211,3,16.429v2.142C3,20.465,5.462,22,8.5,22Z"/>
-</g>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+
+<svg
+   fill="#ffe81c"
+   width="900"
+   height="900"
+   viewBox="0 0 27 27"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="CoinIcon.svg"
+   xml:space="preserve"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><defs
+     id="defs1" /><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.36283417"
+     inkscape:cx="256.31544"
+     inkscape:cy="-15.15844"
+     inkscape:window-width="1920"
+     inkscape:window-height="1010"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" /><g
+     id="SVGRepo_bgCarrier"
+     stroke-width="0" /><g
+     id="SVGRepo_tracerCarrier"
+     stroke-linecap="round"
+     stroke-linejoin="round" /><g
+     id="SVGRepo_iconCarrier"
+     transform="matrix(1.137804,0,0,1.137804,-1.1575536,0.60633759)"><path
+       d="m 15,22 a 6,6 0 1 1 6,-6 6,6 0 0 1 -6,6 z M 8.5,8.857 C 11.538,8.857 14,7.322 14,5.429 14,3.536 11.538,2 8.5,2 5.462,2 3,3.535 3,5.429 3,7.323 5.462,8.857 8.5,8.857 Z M 7.673,12.8 A 8.018,8.018 0 0 1 9.041,10.681 C 8.861,10.692 8.685,10.714 8.5,10.714 5.462,10.714 3,9.179 3,7.286 v 2.142 c 0,1.717 2.032,3.121 4.673,3.372 z M 7.139,17.456 A 8.03,8.03 0 0 1 7,16 C 7,15.76 7.015,15.523 7.036,15.288 4.712,14.889 3,13.576 3,12 v 2.143 c 0,1.599 1.762,2.934 4.139,3.313 z M 8.5,22 A 8.83,8.83 0 0 0 9.579,21.933 5.451,5.451 0 0 1 8.906,21.171 8.064,8.064 0 0 1 7.977,19.826 C 5.188,19.66 3,18.211 3,16.429 v 2.142 C 3,20.465 5.462,22 8.5,22 Z"
+       id="path1" /></g><path
+     d="m 25.639038,3.6461505 h -2.30207 v -2.302071 c 0,-0.63594791 -0.515376,-1.15103491 -1.151036,-1.15103491 -0.635658,0 -1.151035,0.515087 -1.151035,1.15103491 v 2.302071 h -2.30207 c -0.635659,0 -1.151036,0.515087 -1.151036,1.151035 0,0.635947 0.515377,1.151035 1.151036,1.151035 h 2.30207 v 2.302071 c 0,0.6359473 0.515377,1.1510353 1.151035,1.1510353 0.63566,0 1.151036,-0.515088 1.151036,-1.1510353 v -2.302071 h 2.30207 c 0.63566,0 1.151036,-0.515088 1.151036,-1.151035 0,-0.635948 -0.515376,-1.151035 -1.151036,-1.151035"
+     id="plus"
+     sketch:type="MSShapeGroup"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.287759" /></svg>

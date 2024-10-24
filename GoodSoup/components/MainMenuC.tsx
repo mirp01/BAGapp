@@ -9,7 +9,7 @@ export function MainMenu() {
             <View>
                 <ButtonCoin />
             </View>
-            <View>
+            <View style={styles.buttonContainer}>
                 <ButtonPrimary title = 'profile' hasMargin/>
                 <ButtonPrimary title = 'rewards' hasMargin />
                 <ButtonPrimary title = 'rankings' />
@@ -26,5 +26,8 @@ const styles = StyleSheet.create ({
         paddingTop: "12%",
         justifyContent: "space-between",
         flexDirection: "row",
+    },
+    buttonContainer: {
+        marginTop: "10%",
     },
 });

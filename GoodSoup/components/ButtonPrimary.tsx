@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { Colors } from '@/constants/Colors';
-import { SvgXml } from 'react-native-svg';
 import profileSvg from '../assets/images/icons/ProfileIcon.svg';
 import dailySvg from '../assets/images/icons/DailyIcon.svg';
 import trophySvg from '../assets/images/icons/TrophyIcon.svg';

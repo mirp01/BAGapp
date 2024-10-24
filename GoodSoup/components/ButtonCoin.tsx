@@ -3,8 +3,10 @@ import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import { Colors } from '@/constants/Colors';
 import CoinsSvg from '../assets/images/icons/CoinIcon.svg';
 
-export default function ButtonPrimary(props: { amount?: '0'; onPress?: () => void; }) {
-    const { amount = '10000000', onPress } = props;
+export default function ButtonPrimary(props: { amount?: 0; onPress?: () => void; }) {
+    const { amount = 0, onPress } = props;
+    const formattedAmount = amount > 99999999 ? '99999999+' : amount;
+
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.buttonWrapper}>
@@ -14,7 +16,7 @@ export default function ButtonPrimary(props: { amount?: '0'; onPress?: () => voi
                     </View>
                 </View>
                 <View style={styles.coinTag}>
-                    <Text style={styles.textTag}>{amount}</Text>
+                    <Text style={styles.textTag}>{formattedAmount}</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         left: '50%',
         alignItems: 'flex-end',
-        paddingEnd: 2,
+        paddingEnd: 4,
         justifyContent: 'center',
         borderBottomRightRadius: 10,
     },
