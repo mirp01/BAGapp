@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable} from 'react-native';
+import { StyleSheet, View, Text, Pressable} from 'react-native';
 import { Colors } from '@/constants/Colors';
 import CoinsSvg from '../assets/images/icons/CoinIcon.svg';
 

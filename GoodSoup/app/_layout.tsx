@@ -14,6 +14,7 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     CrystalRadioKit: require('../assets/fonts/Crystal Radio Kit.otf'),
+    Alphakind: require('../assets/fonts/Alphakind.ttf'),
   });
 
   useEffect(() => {

@@ -23,7 +23,7 @@ export default function Modal(props: ModalProps) {
     };
 
     return (
-        <RNModal visible={modalVisible} transparent={true} animationType="fade" {...rest}onRequestClose={handleClose}>
+        <RNModal visible={modalVisible} transparent={true} animationType="fade" {...rest} onRequestClose={handleClose}>
             <View style={styles.modalContainer}>
                 <View style={styles.modalView}>
                         <ImageBackground source={require('../assets/images/brush01_03Y.png')} style={styles.circles} />
@@ -63,15 +63,17 @@ const styles = StyleSheet.create({
     },
     modalView: {
         minHeight: 150,
-        maxHeight: '100%',
-        width: '100%',  
+        maxHeight: '90%',
+        width: '90%',  
         backgroundColor: Colors.purple,
         borderRadius: 20,
         shadowColor: '#000',
         overflow: 'hidden',
     },
     scrollContent: {
-        padding: 25,
+        padding: 15,
+        alignItems: 'center',
+        display: 'flex',
     },
     margin: {
         minHeight: 150,

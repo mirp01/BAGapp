@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Pressable, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Pressable} from 'react-native';
 import { Colors } from '@/constants/Colors';
 import profileSvg from '../assets/images/icons/ProfileIcon.svg';
 import dailySvg from '../assets/images/icons/DailyIcon.svg';
