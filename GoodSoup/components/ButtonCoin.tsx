@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable} from 'react-native';
 import { Colors } from '@/constants/Colors';
 import CoinsSvg from '../assets/images/icons/CoinIcon.svg';
 
-export default function ButtonPrimary(props: { amount?: 0; onPress?: () => void; }) {
+export default function ButtonPrimary(props: { amount?: number; onPress?: () => void; }) {
     const { amount = 0, onPress } = props;
     const formattedAmount = amount > 99999999 ? '99999999+' : amount;
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <Pressable onPress={onPress}>
             <View style={styles.buttonWrapper}>
                 <View style={styles.buttonPrimary}>
                     <View style={styles.insetBorder}>
@@ -19,7 +19,7 @@ export default function ButtonPrimary(props: { amount?: 0; onPress?: () => void;
                     <Text style={styles.textTag}>{formattedAmount}</Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 

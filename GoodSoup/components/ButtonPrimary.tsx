@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Pressable, TouchableOpacity} from 'react-native';
 import { Colors } from '@/constants/Colors';
 import profileSvg from '../assets/images/icons/ProfileIcon.svg';
 import dailySvg from '../assets/images/icons/DailyIcon.svg';
@@ -17,11 +17,11 @@ export default function ButtonPrimary(props: { title?: ImageKeys; onPress?: () =
     const { title = 'profile', onPress, hasMargin = false } = props;
     const IconComponent = IMAGE_MAPPING[title];
     return (
-        <TouchableOpacity style={[styles.buttonPrimary, hasMargin && { marginBottom: 10 }]} onPress={onPress}>
+        <Pressable style={[styles.buttonPrimary, hasMargin && { marginBottom: 10 }]} onPress={onPress}>
             <View style={styles.insetBorder}>
                 <IconComponent width={30} height={30} />
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 
