@@ -4,10 +4,13 @@ import  ButtonPrimary from '@/components/ButtonPrimary';
 import  ButtonCoin from '@/components/ButtonCoin';
 import  Modal from '@/components/Modal';
 import  OptionButton from '@/components/OptionButtonPrimary';
+import { useRouter } from "expo-router";
 
 export function MainMenu() {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState<React.ReactNode>(null);
+
+    const router = useRouter();
 
     const openModal = (content: React.ReactNode) => {
         setModalContent(content);
@@ -20,8 +23,13 @@ export function MainMenu() {
                 <ButtonCoin amount={100} onPress={() => openModal(<Text>Hola</Text>)} />
             </View>
             <View style={styles.buttonContainer}>
-                <ButtonPrimary title = 'profile' hasMargin onPress={() => openModal(<Text style={styles.normal}
-                    >Hola Este es el texto normal</Text>)}/>
+                <ButtonPrimary title = 'profile' hasMargin onPress={() => openModal(
+                    <>
+                        <OptionButton title = 'Iniciar sesión' type = 'extra' onPress={() => {
+                            router.push('/login');
+                        }}/>
+                    </>
+                )}/>
                 <ButtonPrimary title = 'rewards' hasMargin onPress={() => openModal(<Text style={styles.funky}>Hola Este es el texto funky</Text>)}/>
                 <ButtonPrimary title = 'rankings' onPress={() => openModal(
                     <>

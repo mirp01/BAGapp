@@ -12,7 +12,7 @@ export default function TabLayout() {
 
   return (
     <ImageBackground 
-        source={require('../../assets/images/Menu.png')} 
+        source={require('../assets/images/Menu.png')} 
         style={styles.backgroundImage}
     >
         <MainMenu />

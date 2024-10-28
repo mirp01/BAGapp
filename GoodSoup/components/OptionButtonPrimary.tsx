@@ -8,6 +8,7 @@ type OptionButtonProps = {
     title: string;
     type: string;
     hasMargin?: boolean;
+    onPress?: () => void; 
 };
 
 const getButtonBackgroundColor = (type: string) => {
@@ -34,11 +35,11 @@ const getButtonBackgroundColor = (type: string) => {
 };
 
 export default function ButtonPrimary(props: OptionButtonProps) {
-    const { isOpen = false, title = 'title', type = 'normal', hasMargin = false } = props;
+    const { isOpen = false, title = 'title', type = 'normal', hasMargin = false, onPress } = props;
     const { backgroundColor, gradient } = getButtonBackgroundColor(type);
 
     return (
-        <Pressable style={[styles.buttonPrimary, hasMargin && { marginBottom: 5 }]}>
+        <Pressable style={[styles.buttonPrimary, hasMargin && { marginBottom: 5 }]} onPress={onPress} >
             {gradient ? (
                 <LinearGradient colors={gradient} style={styles.buttonContent}>
                     <View style={styles.insetBorder}>
