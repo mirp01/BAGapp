@@ -23,12 +23,6 @@ export function ProfileModalContent() {
     const handleOnPressPreferences = () => {
         setShowPreferencesContainer(!showPreferencesContainer);
     }
-    const handleOnPressSupport = () => {
-        console.log("Contat Support button pressed");
-    }
-    const handleOnPressPrivacy = () => {
-        console.log("Data and privacy button pressed");
-    }
     const handleOnPressLogOut = () => {
         console.log("Log Out button pressed");
     }
@@ -109,8 +103,8 @@ export function ProfileModalContent() {
                     <Ionicons name="volume-high" size={24} color="#DDDDDD" />
                 </View>
             </View>
-            <OptionButton title='Contacta soporte' type='extra' hasMargin onPress={handleOnPressSupport} />
-            <OptionButton title='Datos y privacidad' type='extra' hasMargin onPress={handleOnPressPrivacy} />
+            <OptionButton title='Contacta soporte' type='extra' hasMargin />
+            <OptionButton title='Datos y privacidad' type='extra' hasMargin />
             <OptionButton title='Iniciar sesión' type='extra' hasMargin onPress={() => {
                 router.push('/login');
             }} />
