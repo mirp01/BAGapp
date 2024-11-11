@@ -11,5 +11,5 @@ export const Colors = {
   green: '#12664F',
   blue: '#2C497F',
   lightBlue: '#4973C1',
-  cerise: '#E42962'
+  cerise: '#eE3962'
 };

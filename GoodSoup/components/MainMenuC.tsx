@@ -7,7 +7,7 @@ import  OptionButton from '@/components/OptionButtonPrimary';
 import { ProfileModalContent } from '@/components/modalComponents/ProfileContent';
 import { DailyModalContent } from '@/components/modalComponents/DailyContent';
 import { AnuncioModal } from '@/components/modalComponents/AnuncioModal';
-
+import { RankingModal } from '@/components/modalComponents/RankingModal';
 
 export function MainMenu() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -28,13 +28,7 @@ export function MainMenu() {
             <View style={styles.buttonContainer}>
                 <ButtonPrimary title = 'profile' hasMargin onPress={() => openModal(<ProfileModalContent />)}/>
                 <ButtonPrimary title = 'rewards' hasMargin onPress={() => openModal(<DailyModalContent />)}/>
-                <ButtonPrimary title = 'rankings' onPress={() => openModal(
-                    <>
-                    <OptionButton title = 'Botón extra' type = 'extra' hasMargin/>
-                    <OptionButton title = 'Botón importante' type = 'important' hasMargin/>
-                    <OptionButton title = 'Botón normal' type = 'normal' />
-                    </>
-                )}/>
+                <ButtonPrimary title = 'rankings' onPress={() => openModal(<RankingModal />)}/>
             </View>
 
             <Modal isOpen={modalVisible} children={modalContent} onRequestClose={() => setModalVisible(false)}/>
