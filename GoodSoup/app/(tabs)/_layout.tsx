@@ -1,6 +1,10 @@
+import { Tabs } from 'expo-router';
 import React from 'react';
 import  { MainMenu } from '@/components/MainMenuC';
 import { ImageBackground, StyleSheet } from 'react-native';
+
+import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
@@ -8,7 +12,7 @@ export default function TabLayout() {
 
   return (
     <ImageBackground 
-        source={require('../assets/images/Menu.png')} 
+        source={require('../../assets/images/Menu.png')} 
         style={styles.backgroundImage}
     >
         <MainMenu />
