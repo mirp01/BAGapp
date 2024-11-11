@@ -1,17 +1,14 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
-import Index from './index';
-import Login from './login';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-const Stack = createNativeStackNavigator();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -31,13 +28,11 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack.Navigator 
-      screenOptions={{
-          headerShown: false,
-        }} 
-      >
-        <Stack.Screen name="index" component={Index} />
-        <Stack.Screen name="login" component={Login} />
-      </Stack.Navigator>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </ThemeProvider>
   );
 }
