@@ -1,70 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Button, Pressable } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Google from 'expo-auth-session/providers/google';
 import { useRouter } from "expo-router";
 import CloseSVG from '../assets/images/icons/close.svg';
 import  OptionButton from '@/components/OptionButtonPrimary';
+import * as WebBrowser from 'expo-web-browser';
+import * as AuthSession from 'expo-auth-session';
+import { Colors } from '@/constants/Colors';
+
+WebBrowser.maybeCompleteAuthSession();
+
+const CLIENT_ID = process.env.EXPO_PUBLIC_CLIENT_ID_GOOGLE_ANDROID;
+const REDIRECT_URI = 'com.pamsann.GoodSoup://auth';
+
+const discovery = {
+    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+    revocationEndpoint: 'https://oauth2.googleapis.com/revoke',
+  };
 
 interface UserInfo {
-    id: string;
+    name: string;
     email: string;
+    picture: string;
 }
 
 export default function Login() {
-    const [token, setToken] = useState<string>("");
+    console.log("CLIENT_ID:", CLIENT_ID);
+    console.log("REDIRECT_URI:", REDIRECT_URI);
     const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
     const router = useRouter();
 
-    const [request, response, promptAsync] = Google.useAuthRequest({
-        androidClientId: process.env.EXPO_PUBLIC_CLIENT_ID_GOOGLE_ANDROID,
-        scopes: ['profile', 'email'],
-     });
+    if (!CLIENT_ID || !REDIRECT_URI) {
+        console.error("CLIENT_ID or REDIRECT_URI is undefined.");
+        return null;
+    }
+
+    const [request, response, promptAsync] = AuthSession.useAuthRequest(
+        {
+            clientId: CLIENT_ID,
+            redirectUri: REDIRECT_URI,
+            scopes: ['openid', 'profile', 'email'],
+        },
+        discovery
+    );
 
     useEffect(() => {
-        handleEffect();
-    }, [response, token]);
-
-    async function handleEffect() {
-        const user = await getLocalUser();
-        console.log("user", user);
-        if (!user) {
-            if (response?.type === "success" && response.authentication) {
-                // setToken(response.authentication.accessToken);
-                await getUserInfo(response.authentication.accessToken);
-            }
-        } else {
-            setUserInfo(user);
-            console.log("loaded locally");
+        if (response?.type === 'success') {
+          const { id_token } = response.params;
+    
+          // Fetch user info from Google
+          fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${id_token}`)
+            .then((response) => response.json())
+            .then((data) => {
+              setUserInfo(data);
+            })
+            .catch((err) => console.error(err));
         }
-    }
-    
-    const getLocalUser = async (): Promise<UserInfo | null> => {
-        const data = await AsyncStorage.getItem("@user");
-        if (!data) return null;
-        return JSON.parse(data);
-    };
+    }, [response]);
 
-    const getUserInfo = async (token: string | undefined): Promise<void> => {
-        if (!token) return;
-        try {
-            const response = await fetch(
-                "https://www.googleapis.com/userinfo/v2/me",
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-    
-            const user: UserInfo = await response.json();
-            await AsyncStorage.setItem("@user", JSON.stringify(user));
-            setUserInfo(user);
-        } catch (error) {
-            console.error("Error fetching user info:", error);
-        }
-    };
-    
     return (
         <View style={styles.container}>
             <Pressable style={styles.closeButton} onPress={() => {
@@ -80,6 +74,14 @@ export default function Login() {
                 console.log("Sign in with Google button pressed");
                 promptAsync();
             }}/>
+
+            {userInfo && (
+                <View>
+                <Text>Name: {userInfo.name}</Text>
+                <Text>Email: {userInfo.email}</Text>
+                <Text>Picture: {userInfo.picture}</Text>
+                </View>
+            )}
             </View>
         </View>
     );
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Alphakind',
-        color: '#e43962',
+        color: Colors.cerise,
         fontSize: 24,
         marginBottom: 30,
     },

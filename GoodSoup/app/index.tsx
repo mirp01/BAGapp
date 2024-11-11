@@ -1,10 +1,6 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
 import  { MainMenu } from '@/components/MainMenuC';
 import { ImageBackground, StyleSheet } from 'react-native';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
