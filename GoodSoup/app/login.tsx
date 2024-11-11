@@ -70,10 +70,14 @@ export default function Login() {
             <ImageBackground source={require('../assets/images/brush01_03Y.png')} style={styles.circlesBottom} />
             <Text style={styles.title}>Inicia Sesión</Text>
             <View style={styles.buttonContainer}>
-            <OptionButton title = 'Sign in con Google' type = 'normal' onPress={() => {
-                console.log("Sign in with Google button pressed");
-                promptAsync();
-            }}/>
+            <OptionButton 
+                title = 'Sign in con Google' 
+                type = 'normal' 
+                onPress={() => {
+                    console.log("Sign in with Google button pressed");
+                    //promptAsync();
+                }}
+            />
 
             {userInfo && (
                 <View>
