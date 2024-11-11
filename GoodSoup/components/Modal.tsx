@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         padding: 15,
         alignItems: 'center',
         display: 'flex',
+        marginTop: 30,
     },
     margin: {
         minHeight: 150,

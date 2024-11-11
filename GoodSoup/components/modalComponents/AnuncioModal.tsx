@@ -1,0 +1,45 @@
+import React from 'react';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { Image } from 'expo-image';
+import { Colors } from '@/constants/Colors';
+import OptionButton from '@/components/OptionButtonPrimary';
+
+
+export function AnuncioModal() {
+
+    return (
+        <>
+        <View style={styles.rewardContainer}>
+            <View style={styles.container}>
+                <Text style={styles.title}>¿Deseas ver un anuncio y aumentar tus monedas?</Text>
+                <OptionButton title = 'Ver anuncio' type = 'important' hasMargin/>
+                <OptionButton title='Cerrar' type='extra' hasMargin />
+            </View>
+            
+        </View>
+        </>
+    );
+}
+
+const styles = StyleSheet.create({
+    rewardContainer: {
+        width: '100%',
+        height: 250,
+        borderRadius: 20,
+        backgroundColor: Colors.lightBlue,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    container: {
+        width: '90%',
+        alignItems: 'center',
+    },
+    title: {
+        fontFamily: 'CrystalRadioKit',
+        color: Colors.purple,
+        fontSize: 22,
+        marginBottom: 20,
+        padding: 10,
+    },
+})
+
