@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.pamsann.GoodSoup"
+      "package": "com.pamsann.GoodSoup",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",

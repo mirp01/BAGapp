@@ -1,63 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Button, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Pressable, Button } from 'react-native';
 import { useRouter } from "expo-router";
 import CloseSVG from '../assets/images/icons/close.svg';
 import  OptionButton from '@/components/OptionButtonPrimary';
 import * as WebBrowser from 'expo-web-browser';
 import * as AuthSession from 'expo-auth-session';
 import { Colors } from '@/constants/Colors';
+import { GoogleSignin, GoogleSigninButton, SignInResponse } from '@react-native-google-signin/google-signin';
 
-WebBrowser.maybeCompleteAuthSession();
+//WebBrowser.maybeCompleteAuthSession(); // to dismiss the web popup
 
-const CLIENT_ID = process.env.EXPO_PUBLIC_CLIENT_ID_GOOGLE_ANDROID;
-const REDIRECT_URI = 'com.pamsann.GoodSoup://auth';
-
-const discovery = {
-    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
-    tokenEndpoint: 'https://oauth2.googleapis.com/token',
-    revocationEndpoint: 'https://oauth2.googleapis.com/revoke',
-  };
-
-interface UserInfo {
-    name: string;
-    email: string;
-    picture: string;
-}
 
 export default function Login() {
-    console.log("CLIENT_ID:", CLIENT_ID);
-    console.log("REDIRECT_URI:", REDIRECT_URI);
-    const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+    // const [userInfo, setUserInfo] = useState<SignInResponse | null>(null);
 
     const router = useRouter();
 
-    if (!CLIENT_ID || !REDIRECT_URI) {
-        console.error("CLIENT_ID or REDIRECT_URI is undefined.");
-        return null;
-    }
-
-    const [request, response, promptAsync] = AuthSession.useAuthRequest(
-        {
-            clientId: CLIENT_ID,
-            redirectUri: REDIRECT_URI,
-            scopes: ['openid', 'profile', 'email'],
-        },
-        discovery
-    );
-
-    useEffect(() => {
-        if (response?.type === 'success') {
-          const { id_token } = response.params;
+    // const configureGoogleSignin = () => {
+    //     GoogleSignin.configure({
+    //         //androidClientId: "1005960240270-ru3p2e5d5oq0o1m34iq4r1j7blipaqpa.apps.googleusercontent.com",
+    //     })
+    // };
+    // useEffect(() => {
+    //     configureGoogleSignin();
+    // });
     
-          // Fetch user info from Google
-          fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${id_token}`)
-            .then((response) => response.json())
-            .then((data) => {
-              setUserInfo(data);
-            })
-            .catch((err) => console.error(err));
-        }
-    }, [response]);
+    // const signIn = async () => {
+    //     console.log("Pressed");
+    //     try{
+    //         await GoogleSignin.hasPlayServices();
+    //         const userInfo = await GoogleSignin.signIn();
+    //         setUserInfo(userInfo);
+    //     } catch(e) {
+    //         console.log("Error: ", e);
+    //     }
+    // };
+    // const logOut = () => {
+    //     setUserInfo(null);
+    //     GoogleSignin.revokeAccess();
+    //     GoogleSignin.signOut();
+    // }
 
     return (
         <View style={styles.container}>
@@ -75,17 +57,19 @@ export default function Login() {
                 type = 'normal' 
                 onPress={() => {
                     console.log("Sign in with Google button pressed");
-                    //promptAsync();
+                    
                 }}
             />
-
-            {userInfo && (
-                <View>
-                <Text>Name: {userInfo.name}</Text>
-                <Text>Email: {userInfo.email}</Text>
-                <Text>Picture: {userInfo.picture}</Text>
-                </View>
-            )}
+            {/* <GoogleSigninButton
+                size={GoogleSigninButton.Size.Standard}
+                color={GoogleSigninButton.Color.Dark}
+                //onPress={signIn}
+            /> */}
+            {/* {userInfo ? (
+                <Button title="logout" onPress={logOut} />
+            ) : (
+                <Text>No userInfo</Text>
+            )} */}
             </View>
         </View>
     );
