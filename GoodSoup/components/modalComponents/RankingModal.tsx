@@ -77,9 +77,6 @@ export function RankingModal() {
 const styles = StyleSheet.create({
     rankingContainer: {
         width: '100%',
-        padding: 10,
-        borderRadius: 20,
-        backgroundColor: Colors.cerise,
         alignItems: 'center',
         justifyContent: 'center'
     },

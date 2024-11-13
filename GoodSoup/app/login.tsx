@@ -18,7 +18,7 @@ export default function Login() {
 
     // const configureGoogleSignin = () => {
     //     GoogleSignin.configure({
-    //         //androidClientId: "1005960240270-ru3p2e5d5oq0o1m34iq4r1j7blipaqpa.apps.googleusercontent.com",
+    //         //androidClientId: "",
     //     })
     // };
     // useEffect(() => {

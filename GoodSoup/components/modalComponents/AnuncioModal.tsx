@@ -13,7 +13,6 @@ export function AnuncioModal() {
             <View style={styles.container}>
                 <Text style={styles.title}>¿Deseas ver un anuncio y aumentar tus monedas?</Text>
                 <OptionButton title = 'Ver anuncio' type = 'important' hasMargin/>
-                <OptionButton title='Cerrar' type='extra' hasMargin />
             </View>
             
         </View>
@@ -24,9 +23,6 @@ export function AnuncioModal() {
 const styles = StyleSheet.create({
     rewardContainer: {
         width: '100%',
-        height: 250,
-        borderRadius: 20,
-        backgroundColor: Colors.lightBlue,
         alignItems: 'center',
         justifyContent: 'center'
     },
