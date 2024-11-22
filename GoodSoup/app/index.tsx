@@ -1,4 +1,3 @@
-import { Tabs } from 'expo-router';
 import React, {  useRef, useState } from 'react';
 import { MainMenu } from '@/components/MainMenuC';
 import { UnityGame, UnityGameRef } from '@/components/UnityGame';
