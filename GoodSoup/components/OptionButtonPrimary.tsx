@@ -8,6 +8,9 @@ type OptionButtonProps = {
     title: string;
     type: string;
     hasMargin?: boolean;
+    hasIcon?: boolean; 
+    icon?: React.ReactNode;
+    onPress?: () => void; 
 };
 
 const getButtonBackgroundColor = (type: string) => {
@@ -34,11 +37,11 @@ const getButtonBackgroundColor = (type: string) => {
 };
 
 export default function ButtonPrimary(props: OptionButtonProps) {
-    const { isOpen = false, title = 'title', type = 'normal', hasMargin = false } = props;
+    const { isOpen = false, title = 'title', type = 'normal', hasMargin = false, hasIcon = false, icon, onPress } = props;
     const { backgroundColor, gradient } = getButtonBackgroundColor(type);
 
     return (
-        <Pressable style={[styles.buttonPrimary, hasMargin && { marginBottom: 5 }]}>
+        <Pressable style={[styles.buttonPrimary, hasMargin && { marginBottom: 10 }]} onPress={onPress} >
             {gradient ? (
                 <LinearGradient colors={gradient} style={styles.buttonContent}>
                     <View style={styles.insetBorder}>
@@ -46,11 +49,20 @@ export default function ButtonPrimary(props: OptionButtonProps) {
                     </View>
                 </LinearGradient>
             ) : (
-                <View style={[{ backgroundColor }, styles.buttonContent]}>
-                    <View style={styles.insetBorder}>
-                        <Text style={styles.buttonText}>{title}</Text>
+                hasIcon ? (
+                    <View style={[{ backgroundColor }, styles.buttonContent]}>
+                        <View style={[styles.insetBorder, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+                            <Text style={[styles.buttonText, {marginLeft: 10}]}>{title}</Text>
+                            {icon && <View style={{ marginRight: 10 }}>{icon}</View>} 
+                        </View>
                     </View>
-                </View>
+                ) : (
+                    <View style={[{ backgroundColor }, styles.buttonContent]}>
+                        <View style={styles.insetBorder}>
+                            <Text style={styles.buttonText}>{title}</Text>
+                        </View>
+                    </View>
+                )
             )}
         </Pressable>
     );
