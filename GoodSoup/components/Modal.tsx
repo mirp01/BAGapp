@@ -6,11 +6,12 @@ import CloseSVG from '../assets/images/icons/close.svg';
 type ModalProps = {
     isOpen?: boolean;
     children: React.ReactNode;
+    modalColor: string;
     onRequestClose?: () => void;
 };
 
 export default function Modal(props: ModalProps) {
-    const { isOpen = false, children, onRequestClose, ...rest } = props;
+    const { isOpen = false, children, modalColor, onRequestClose, ...rest } = props;
     const [modalVisible, setModalVisible] = useState(isOpen);
 
     useEffect(() => {
@@ -25,7 +26,7 @@ export default function Modal(props: ModalProps) {
     return (
         <RNModal visible={modalVisible} transparent={true} animationType="fade" {...rest} onRequestClose={handleClose}>
             <View style={styles.modalContainer}>
-                <View style={styles.modalView}>
+                <View style={[styles.modalView,  {backgroundColor: modalColor ? modalColor : Colors.purple} ]}>
                         <ImageBackground source={require('../assets/images/brush01_03Y.png')} style={styles.circles} />
                         <Pressable style={styles.closeButton} onPress={handleClose}>
                             <CloseSVG width="30" height="30" />
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
         padding: 15,
         alignItems: 'center',
         display: 'flex',
+        marginTop: 30,
     },
     margin: {
         minHeight: 150,

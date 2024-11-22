@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331980077910",
+    "project_id": "goodsoup-1c393",
+    "storage_bucket": "goodsoup-1c393.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331980077910:android:1a30957e294c7c76f9f4f7",
+        "android_client_info": {
+          "package_name": "com.pamsann.GoodSoup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzCk3zGAFOmJMKgoewgcqfSN-9kmC2dew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
