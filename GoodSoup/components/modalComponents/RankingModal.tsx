@@ -4,8 +4,6 @@ import { Image } from 'expo-image';
 import { Colors } from '@/constants/Colors';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-
-
 export function RankingModal() {
 
     return (

@@ -1,45 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Pressable, Button } from 'react-native';
 import { useRouter } from "expo-router";
 import CloseSVG from '../assets/images/icons/close.svg';
 import  OptionButton from '@/components/OptionButtonPrimary';
-import * as WebBrowser from 'expo-web-browser';
-import * as AuthSession from 'expo-auth-session';
 import { Colors } from '@/constants/Colors';
-import { GoogleSignin, GoogleSigninButton, SignInResponse } from '@react-native-google-signin/google-signin';
-
-//WebBrowser.maybeCompleteAuthSession(); // to dismiss the web popup
-
 
 export default function Login() {
-    // const [userInfo, setUserInfo] = useState<SignInResponse | null>(null);
-
     const router = useRouter();
-
-    // const configureGoogleSignin = () => {
-    //     GoogleSignin.configure({
-    //         //androidClientId: "",
-    //     })
-    // };
-    // useEffect(() => {
-    //     configureGoogleSignin();
-    // });
-    
-    // const signIn = async () => {
-    //     console.log("Pressed");
-    //     try{
-    //         await GoogleSignin.hasPlayServices();
-    //         const userInfo = await GoogleSignin.signIn();
-    //         setUserInfo(userInfo);
-    //     } catch(e) {
-    //         console.log("Error: ", e);
-    //     }
-    // };
-    // const logOut = () => {
-    //     setUserInfo(null);
-    //     GoogleSignin.revokeAccess();
-    //     GoogleSignin.signOut();
-    // }
 
     return (
         <View style={styles.container}>
@@ -60,16 +27,6 @@ export default function Login() {
                     
                 }}
             />
-            {/* <GoogleSigninButton
-                size={GoogleSigninButton.Size.Standard}
-                color={GoogleSigninButton.Color.Dark}
-                //onPress={signIn}
-            /> */}
-            {/* {userInfo ? (
-                <Button title="logout" onPress={logOut} />
-            ) : (
-                <Text>No userInfo</Text>
-            )} */}
             </View>
         </View>
     );

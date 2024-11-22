@@ -4,7 +4,6 @@ import { Image } from 'expo-image';
 import { Colors } from '@/constants/Colors';
 import OptionButton from '@/components/OptionButtonPrimary';
 
-
 interface RewardModalProps {
     setShowRewardModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -21,7 +20,7 @@ export function RewardModal({ setShowRewardModal }: RewardModalProps) {
                 <Text style={styles.title}>¡Has obtenido 20 monedas!</Text>
                 <View style={styles.imageContainer}>
                     <Image style={styles.image}
-                        source={{ uri: "https://cdn-icons-png.flaticon.com/512/123/123396.png" }}
+                        source={require('../../assets/images/coinRewards.png')}
                     />
                 </View>
                 
