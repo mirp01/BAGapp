@@ -9,7 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-unity/builds
+/unity/builds
 android/
 .env
 eas.json
