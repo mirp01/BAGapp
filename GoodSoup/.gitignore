@@ -11,6 +11,8 @@ npm-debug.*
 web-build/
 unity/builds
 android/
+.env
+eas.json
 # macOS
 .DS_Store
 
