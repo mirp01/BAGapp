@@ -44,7 +44,7 @@ export function MainMenu({ onCloseModal }: MainMenuProps) {
                 <ButtonPrimary title = 'rankings' onPress={() => openModal(<RankingModal />, Colors.cerise)}/>
             </View>
 
-            <Modal isOpen={modalVisible} children={modalContent} modalColor={modalColor} onRequestClose={() => setModalVisible(false)}/>
+            <Modal isOpen={modalVisible} children={modalContent} modalColor={modalColor} onRequestClose={ closeModal }/>
         </View>
     );
 }

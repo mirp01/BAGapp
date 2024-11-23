@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
 
 import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -14,20 +15,46 @@ const Stack = createNativeStackNavigator();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
-    // Hide splash screen immediately since we're not loading fonts
-    SplashScreen.hideAsync();
+    async function prepare() {
+      try {
+        // Load fonts
+        await Font.loadAsync({
+          'Alphakind': require('../assets/fonts/Alphakind.ttf'),
+          'CrystalRadioKit': require('../assets/fonts/Crystal-Radio-Kit.otf'),
+          // Add more fonts as needed
+        });
+      } catch (e) {
+        console.warn('Error loading fonts:', e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
   }, []);
 
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // Hide splash screen once fonts are loaded
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <Stack.Navigator 
+    <Stack.Navigator
       screenOptions={{
-          headerShown: false,
-        }} 
-      >
-        <Stack.Screen name="index" component={Index} />
-        <Stack.Screen name="login" component={Login} />
-      </Stack.Navigator>
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="index" component={Index} />
+      <Stack.Screen name="login" component={Login} />
+    </Stack.Navigator>
   );
 }
