@@ -20,11 +20,9 @@ export default function RootLayout() {
   useEffect(() => {
     async function prepare() {
       try {
-        // Load fonts
         await Font.loadAsync({
           'Alphakind': require('../assets/fonts/Alphakind.ttf'),
           'CrystalRadioKit': require('../assets/fonts/Crystal-Radio-Kit.otf'),
-          // Add more fonts as needed
         });
       } catch (e) {
         console.warn('Error loading fonts:', e);
