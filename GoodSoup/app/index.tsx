@@ -35,7 +35,7 @@ const playSound = async(isPlaying: boolean) =>{
 
 export default function TabLayout(){
   const colorScheme = useColorScheme();
-  const [showMainMenu, setShowMainMenu] = useState<boolean>(false);
+  const [showMainMenu, setShowMainMenu] = useState<boolean>(true); //OJO, change to false
   const unityGameRef = useRef<UnityGameRef>(null);
 
   const handleUnityMessage =(message: string) =>{

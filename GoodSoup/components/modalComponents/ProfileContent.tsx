@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
+import { StyleSheet, View, Text, Pressable, ActivityIndicator, TextInput } from 'react-native';
 import { Image } from 'expo-image';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,18 +8,52 @@ import { Colors } from '@/constants/Colors';
 import { useRouter } from "expo-router";
 import Slider from '@react-native-community/slider';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { getUserData } from '../../config/getData';
+import { setUserParameter } from '../../config/setUser';
+import { testUserID } from '@/constants/testuser';
 
+interface User {
+    username: string;
+    coins: number;
+    score: number;
+}
 
 export function ProfileModalContent() {
     const [musicValue, setMusicValue] = useState(50);
     const [sfxValue, setSfxValue] = useState(50);
     const [showPreferencesContainer, setShowPreferencesContainer] = useState(false);
+    const [userData, setUserData] = useState<User | null>(null);
+    const [newusername, setNewUsername] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+    const inputRef = useRef<TextInput>(null);
 
     const router = useRouter();
 
-    const handleEditName = () => {
-        console.log("Edit name button pressed");
+    const handleEditName = async (userId: string, newUsername: string) => {
+        try {
+            const success = await setUserParameter(userId, 'username', newUsername, 0);
+            if (success) {
+            console.log('User data was successfully set/updated.');
+            const updatedUserData = await getUserData(userId);
+            if (updatedUserData) {
+                setUserData(updatedUserData); // Update the state with the new user data
+            }
+            setIsEditing(false);
+            } else {
+            console.log('Failed to set/update user data.');
+            }
+        } catch (error) {
+            console.error('Error in handleEditName:', error);
+        }
     }
+    const handleEditButton = () => {
+        setIsEditing(true);
+        inputRef.current?.focus();
+    };
+    const closeEdit = () => {
+        setIsEditing(false);
+    }
+
     const handleOnPressPreferences = () => {
         setShowPreferencesContainer(!showPreferencesContainer);
     }
@@ -33,6 +67,12 @@ export function ProfileModalContent() {
         <AntDesign name="down" size={24} color="#DDDDDD" style={{ marginRight: 10 }} />
     );
 
+    useEffect(() => {
+        getUserData(testUserID).then(data => {
+          setUserData(data);
+        });
+    }, [testUserID]);
+
     return (
         <>
             <Text style={styles.profileTitle}>Mi cuenta</Text>
@@ -40,19 +80,73 @@ export function ProfileModalContent() {
                 source={{ uri: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg" }}
             />
             <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.profileName}>John Doe</Text>
-                <Pressable onPress={handleEditName}>
+                {userData ? (
+                    !isEditing ? (
+                    <>
+                        <Text style={styles.profileName}>{userData.username}</Text>
+                    </>
+                    ) : (
+                        <></>
+                    )
+                ) : (
+                    <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                        <ActivityIndicator size="large" color="white" />
+                    </View>
+                )}
+                <Pressable onPress={handleEditButton}>
+                {!isEditing ? (
                     <MaterialIcons name="mode-edit" size={30} color="#DDDDDD" style={{ marginLeft: 5, marginTop: 3 }} />
+                ) : (
+                    <></>
+                )}
                 </Pressable>
+                {isEditing && (
+                    <View style={{marginBottom: 10, flexDirection: 'row', flex: 1, position: 'relative'}}>
+                        <TextInput
+                            ref={inputRef}
+                            style={{
+                            height: 40,
+                            minWidth: 300,
+                            backgroundColor: 'white',
+                            marginTop: 20,
+                            paddingLeft: 10,
+                            }}
+                            placeholder="Nuevo nombre de usuario"
+                            value={newusername}
+                            onChangeText={(text) => setNewUsername(text)}
+                            onSubmitEditing={() => handleEditName(testUserID, newusername)}
+                        />
+                        <Pressable onPress={closeEdit}>
+                            <Ionicons name="close" size={26} color="purple" style={{position: 'absolute', top: 25, right: 10}} />
+                        </Pressable>
+                    </View>
+                    
+                )}
             </View>
             <View style={styles.scoreContainer}>
                 <View style={styles.scoreRow}>
                     <Text style={styles.score}>Mi puntuación {'\n'}total</Text>
-                    <Text style={styles.score}>5000000</Text>
+                    {userData ? (
+                        <>
+                        <Text style={styles.score}>{userData.score}</Text>
+                        </>
+                    ) : (
+                        <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                            <ActivityIndicator size="large" color="white" />
+                        </View>
+                    )}
                 </View>
                 <View style={[styles.scoreRow, { marginBottom: 20 }]}>
                     <Text style={styles.score}>Mis monedas</Text>
-                    <Text style={styles.score}>10</Text>
+                    {userData ? (
+                        <>
+                        <Text style={styles.score}>{userData.coins}</Text>
+                        </>
+                    ) : (
+                        <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                            <ActivityIndicator size="large" color="white" />
+                        </View>
+                    )}
                 </View>
             </View>
             <OptionButton 

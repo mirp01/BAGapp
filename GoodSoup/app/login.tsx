@@ -23,8 +23,7 @@ export default function Login() {
                 title = 'Sign in con Google' 
                 type = 'normal' 
                 onPress={() => {
-                    console.log("Sign in with Google button pressed");
-                    
+                    console.log("Sign in with Google button pressed"); 
                 }}
             />
             </View>

@@ -6,6 +6,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 import { RewardModal } from '@/components/modalComponents/RewardModal';
 import { useCalendar } from '@/hooks/useCalendar';
+import { setUserParameter } from '../../config/setUser';
+import { testUserID } from '@/constants/testuser';
 
 export function DailyModalContent() {
     const { weeks, monthName, currentDay } = useCalendar();
@@ -18,10 +20,24 @@ export function DailyModalContent() {
     }, []);
 
     const handlePress = async (day: number) => {
-        if (day === currentDay && !dailyRewardClaimed) {
+        if (day == currentDay && !dailyRewardClaimed) {
             await storeData(true);
             setDailyRewardClaimed(true);
             setShowRewardModal(true);
+
+            // update coins
+            try {
+                const success = await setUserParameter(testUserID, 'username', '', 20);
+                if (success) {
+                console.log('Coins granted!');
+                } else {
+                console.log('Failed to set/update user data.');
+                }
+            } catch (error) {
+                console.error('Error in handleEditName:', error);
+            }
+        } else {
+            console.log('Reward can only be claimed on the current day of the week.');
         }
     };
     
