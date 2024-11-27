@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { StyleSheet, View } from 'react-native';
 import  ButtonPrimary from '@/components/ButtonPrimary';
 import  ButtonCoin from '@/components/ButtonCoin';
@@ -9,6 +9,14 @@ import { DailyModalContent } from '@/components/modalComponents/DailyContent';
 import { AnuncioModal } from '@/components/modalComponents/AnuncioModal';
 import { RankingModal } from '@/components/modalComponents/RankingModal';
 import { Colors } from '@/constants/Colors';
+import { listenUserData } from '../config/listenUser';
+
+import { testUserID } from '@/constants/testuser';
+interface User {
+  username: string;
+  coins: number;
+  score: number;
+}
 
 interface MainMenuProps {
   onCloseModal?: () => void;
@@ -18,6 +26,7 @@ export function MainMenu({ onCloseModal }: MainMenuProps) {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState<React.ReactNode>(null);
     const [modalColor, setModalColor] = useState<string>(Colors.purple);
+    const [userData, setUserData] = useState<User | null>(null);
 
 
     const openModal = (content: React.ReactNode, color: string) => {
@@ -33,10 +42,19 @@ export function MainMenu({ onCloseModal }: MainMenuProps) {
       }
     };
 
+    useEffect(() => {
+      listenUserData(testUserID, (data) => {
+        setUserData(data);
+      });
+    }, [testUserID]);
+
     return (
         <View style={[styles.container, { position: 'absolute', top: 0, left: 0, right: 0 }]}>
             <View>
-                <ButtonCoin amount={100} onPress={() => openModal(<AnuncioModal />, Colors.lightBlue )} />
+            <ButtonCoin
+              amount={userData?.coins ?? 0}
+              onPress={() => openModal(<AnuncioModal />, Colors.lightBlue)}
+            />
             </View>
             <View style={styles.buttonContainer}>
                 <ButtonPrimary title = 'profile' hasMargin onPress={() => openModal(<ProfileModalContent />, Colors.purple)}/>
