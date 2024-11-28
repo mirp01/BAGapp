@@ -4,21 +4,22 @@ interface User {
     username: string;
     coins: number;
     score: number;
+    id: number;
 }
 
 export async function getTopUsers(): Promise<User[]> {
     try {
-      const usersRef = ref(database, 'testUser'); // Reference to the 'testUser' node in your database
+      const usersRef = ref(database, 'testUser');
       const snapshot = await get(usersRef);
   
       if (snapshot.exists()) {
         const usersData = snapshot.val();
         
-        // Convert users object to an array
         const usersArray: User[] = Object.keys(usersData).map(key => ({
           username: usersData[key].username,
           coins: usersData[key].coins,
           score: usersData[key].score,
+          id: usersData[key].id
         }));
         
         // Sort users by score in descending order

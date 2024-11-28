@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { Image } from 'expo-image';
+import { StyleSheet, View, Text } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import OptionButton from '@/components/OptionButtonPrimary';
 

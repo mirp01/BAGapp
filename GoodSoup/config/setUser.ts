@@ -28,11 +28,6 @@ export async function setUserParameter(userId: string, parameter: string, newUse
 
 
     }
-    
-    
-    
-
-    console.log('User data successfully updated to: ', parameter);
     return true;
   } catch (error) {
     console.error('Error updating user data:', error);

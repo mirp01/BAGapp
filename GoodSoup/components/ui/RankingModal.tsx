@@ -10,18 +10,20 @@ interface User {
     username: string;
     coins: number;
     score: number;
+    id: number;
 }
 
 export function RankingModal() {
   const [topUsers, setTopUsers] = useState<User[]>([]);
+  const [userInTop, setuserInTop] = useState(false);
 
   useEffect(() => {
-    // Fetch the top users when the component mounts
     async function fetchTopUsers() {
       const users = await getTopUsers();
       setTopUsers(users);
+      const userInTop = users.some((user) => user.id === Number(testUserID));
+      setuserInTop(userInTop);
     }
-
     fetchTopUsers();
   }, []);
 
@@ -31,39 +33,79 @@ export function RankingModal() {
         <Text style={styles.title}>Ranking Nacional</Text>
         <View style={styles.topImagesContainer}>
                 <Image style={[styles.profileImage, {zIndex: 1, position: 'absolute' }]}
-                    source={{ uri: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg" }}
+                    source={require('../../assets/images/pp.png')}
                 />
                 <Image style={[styles.profileImage, {zIndex: 0, marginRight: 50, height: 110, width: 110, borderRadius: 110 / 2, }]}
-                    source={{ uri: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg" }}
+                    source={require('../../assets/images/pp.png')}
                 />
                 <Image style={[styles.profileImage, {zIndex: 0, height: 110, width: 110, borderRadius: 110 / 2,}]}
-                    source={{ uri: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg" }}
+                    source={require('../../assets/images/pp.png')}
                 />
         </View>
         
         <View style={styles.rankTableContainer}>
-        {topUsers.map((user, index) => (
-            <View key={index} style={styles.row}>
-              <View style={styles.rankingPlace}>
-                <Text
-                  style={[styles.rankingText, { color: index < 3 ? '#FF9F1C' : '#FFFFFF' }]}>
-                  {index + 1}
-                </Text>
-                {index < 3 && (
-                  <MaterialCommunityIcons name="crown" size={26} color='#FF9F1C' style={{ marginLeft: 5 }} />
-                )}
-                <Text
-                  style={[styles.rankingText, { color: index < 3 ? '#FF9F1C' : '#FFFFFF' }]}>
-                  {user.username}
-                </Text>
-              </View>
-              <Text
-                style={[styles.rankingText, { color: index < 3 ? '#FF9F1C' : '#FFFFFF' }]}>
-                {user.score}
-              </Text>
-            </View>
-          ))}
+  {topUsers.map((user, index) => (
+    <React.Fragment key={index}> 
+      <View style={styles.row}>
+        <View style={styles.rankingPlace}>
+          <Text
+            style={[
+              styles.rankingText,
+              { 
+                color: userInTop && user.id === Number(testUserID) 
+                  ? '#481c68' 
+                  : index < 3 
+                  ? '#FF9F1C' 
+                  : '#FFFFFF',
+              },
+            ]}
+          >
+            {index + 1}
+          </Text>
+          {index < 3 && (
+            <MaterialCommunityIcons
+              name="crown"
+              size={26}
+              color="#FF9F1C"
+              style={{ marginLeft: 5 }}
+            />
+          )}
+          <Text
+            style={[
+              styles.rankingText,
+              { 
+                color: userInTop && user.id === Number(testUserID)
+                  ? '#481c68'
+                  : index < 3
+                  ? '#FF9F1C'
+                  : '#FFFFFF',
+              },
+            ]}
+          >
+            {user.username}
+          </Text>
         </View>
+        <Text
+          style={[
+            styles.rankingText,
+            {
+              color: userInTop && user.id === Number(testUserID)
+                ? '#481c68'
+                : index < 3
+                ? '#FF9F1C'
+                : '#FFFFFF',
+            },
+          ]}
+        >
+          {user.score}
+        </Text>
+      </View>
+      <View style={styles.divider} />
+    </React.Fragment>
+  ))}
+</View>
+
+        
       </View>
     </>
   );
@@ -118,5 +160,6 @@ const styles = StyleSheet.create({
     height: 1.5,
     width: '100%',
     backgroundColor: '#DDDDDD',
+    marginBottom: 5
   },
 });
