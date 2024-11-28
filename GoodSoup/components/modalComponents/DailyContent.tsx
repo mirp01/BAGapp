@@ -27,7 +27,7 @@ export function DailyModalContent() {
 
             // update coins
             try {
-                const success = await setUserParameter(testUserID, 'username', '', 20);
+                const success = await setUserParameter(testUserID, 'coins', '', 20);
                 if (success) {
                 console.log('Coins granted!');
                 } else {
@@ -45,7 +45,7 @@ export function DailyModalContent() {
         try {
             const claimed = await AsyncStorage.getItem(rewardKey);
             if(claimed === 'true'){
-                setDailyRewardClaimed(true);
+                setDailyRewardClaimed(false);
             }
         } catch (e) {
             console.log("Error: " + e + ". Error reading data.");

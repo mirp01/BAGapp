@@ -4,6 +4,10 @@ import{ UnityGame, UnityGameRef }from '@/components/UnityGame';
 import{ View }from 'react-native';
 import{ useColorScheme }from '@/hooks/useColorScheme';
 import{ Audio }from 'expo-av';
+import { setUserParameter } from '@/config/setUser';
+import { testUserID } from '@/constants/testuser';
+import { ScoreModal } from '@/components/modalComponents/ScoreModal';
+import { Colors } from '@/constants/Colors';
 
 let currentSound: Audio.Sound | null = null;
 
@@ -37,8 +41,11 @@ export default function TabLayout(){
   const colorScheme = useColorScheme();
   const [showMainMenu, setShowMainMenu] = useState<boolean>(true); //OJO, change to false
   const unityGameRef = useRef<UnityGameRef>(null);
+  const [newscore, setNewscore] = useState<string | null>(null);
 
-  const handleUnityMessage =(message: string) =>{
+
+
+  const handleUnityMessage = async (message: string) =>{
     if(message === 'Start'){
       setShowMainMenu(true);
       playSound(true);
@@ -48,11 +55,17 @@ export default function TabLayout(){
     }else if(message.startsWith('Score')){
       const score = message.split(" ")[1];
       console.log(score);
-      //saveScore(score); AQUI GUARDAR SCORE
+      try {
+        const success = await setUserParameter(testUserID, 'score', '', Number(score));
+        setNewscore(score);
+      } catch (e) {
+        console.log("Error. ", e);
+      }
     }
   };
 
   const handleModalClose =() =>{
+    setNewscore(null);
     if(unityGameRef.current){
       unityGameRef.current.resumeUnity();
     }
@@ -62,6 +75,7 @@ export default function TabLayout(){
     <View style={{ flex: 1 }}>
     {showMainMenu && <MainMenu onCloseModal={handleModalClose}/>}
       <UnityGame ref={unityGameRef}onUnityMessage={handleUnityMessage}/>
+      {newscore && <ScoreModal score={newscore} />}
     </View>
   );
 }
