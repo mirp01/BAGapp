@@ -74,7 +74,7 @@ export default function TabLayout(){
   return(
     <View style={{ flex: 1 }}>
     {showMainMenu && <MainMenu onCloseModal={handleModalClose}/>}
-      <UnityGame ref={unityGameRef}onUnityMessage={handleUnityMessage}/>
+      {/* <UnityGame ref={unityGameRef}onUnityMessage={handleUnityMessage}/> */}
       {newscore && <ScoreModal score={newscore} />}
     </View>
   );
