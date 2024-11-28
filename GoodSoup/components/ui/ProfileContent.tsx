@@ -9,8 +9,8 @@ import { useRouter } from "expo-router";
 import Slider from '@react-native-community/slider';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { getUserData } from '../../config/getData';
-import { setUserParameter } from '../../config/setUser';
 import { testUserID } from '@/constants/testuser';
+import { handleEditName, handleEditButton, closeEdit } from './utils/editName';
 
 interface User {
     username: string;
@@ -29,36 +29,8 @@ export function ProfileModalContent() {
 
     const router = useRouter();
 
-    const handleEditName = async (userId: string, newUsername: string) => {
-        try {
-            const success = await setUserParameter(userId, 'username', newUsername, 0);
-            if (success) {
-            console.log('User data was successfully set/updated.');
-            const updatedUserData = await getUserData(userId);
-            if (updatedUserData) {
-                setUserData(updatedUserData); // Update the state with the new user data
-            }
-            setIsEditing(false);
-            } else {
-            console.log('Failed to set/update user data.');
-            }
-        } catch (error) {
-            console.error('Error in handleEditName:', error);
-        }
-    }
-    const handleEditButton = () => {
-        setIsEditing(true);
-        inputRef.current?.focus();
-    };
-    const closeEdit = () => {
-        setIsEditing(false);
-    }
-
     const handleOnPressPreferences = () => {
         setShowPreferencesContainer(!showPreferencesContainer);
-    }
-    const handleOnPressLogOut = () => {
-        console.log("Log Out button pressed");
     }
 
     const icon = showPreferencesContainer ? (
@@ -77,7 +49,7 @@ export function ProfileModalContent() {
         <>
             <Text style={styles.profileTitle}>Mi cuenta</Text>
             <Image style={styles.profileImage}
-                source={{ uri: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg" }}
+                source={require('../../assets/images/pp.png')}
             />
             <View style={{ flexDirection: 'row' }}>
                 {userData ? (
@@ -93,7 +65,7 @@ export function ProfileModalContent() {
                         <ActivityIndicator size="large" color="white" />
                     </View>
                 )}
-                <Pressable onPress={handleEditButton}>
+                <Pressable onPress={() => handleEditButton(setIsEditing, inputRef)}>
                 {!isEditing ? (
                     <MaterialIcons name="mode-edit" size={30} color="#DDDDDD" style={{ marginLeft: 5, marginTop: 3 }} />
                 ) : (
@@ -101,23 +73,27 @@ export function ProfileModalContent() {
                 )}
                 </Pressable>
                 {isEditing && (
-                    <View style={{marginBottom: 10, flexDirection: 'row', flex: 1, position: 'relative'}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 15}}>
                         <TextInput
                             ref={inputRef}
                             style={{
                             height: 40,
-                            minWidth: 300,
+                            minWidth: 250,
+                            width: 300,
                             backgroundColor: 'white',
-                            marginTop: 20,
                             paddingLeft: 10,
+                            fontSize: 16,
+                            borderRadius: 10,
                             }}
-                            placeholder="Nuevo nombre de usuario"
+                            placeholder="Editar nombre de usuario"
                             value={newusername}
                             onChangeText={(text) => setNewUsername(text)}
-                            onSubmitEditing={() => handleEditName(testUserID, newusername)}
+                            onSubmitEditing={() => handleEditName(testUserID, newusername, setUserData, setIsEditing)}
                         />
-                        <Pressable onPress={closeEdit}>
-                            <Ionicons name="close" size={26} color="purple" style={{position: 'absolute', top: 25, right: 10}} />
+                        <Pressable onPress={() => closeEdit(setIsEditing)}>
+                            <View style={{ position: 'absolute', right: 5, top: -15,}}> 
+                                <Ionicons name="close" size={30} color="#a2a2a2"/>
+                            </View>
                         </Pressable>
                     </View>
                     
@@ -158,7 +134,7 @@ export function ProfileModalContent() {
                 icon={icon}  
             />
             <View style={[styles.preferencesContainer, { display: showPreferencesContainer ? 'flex' : 'none', opacity: showPreferencesContainer ? 1 : 0, }]}>
-                <Text style={styles.textStyle}>Música</Text>
+                    <Text style={styles.textStyle}>Música</Text>
                 <Slider
                     style={{width: 330, height: 30}}
                     minimumValue={0}
@@ -202,7 +178,7 @@ export function ProfileModalContent() {
             <OptionButton title='Iniciar sesión' type='extra' hasMargin onPress={() => {
                 router.push('/login');
             }} />
-            <OptionButton title='Cerrar sesión' type='important' hasMargin onPress={handleOnPressLogOut} />
+            <OptionButton title='Cerrar sesión' type='important' hasMargin />
             <View style={{marginBottom: 40}}></View>
         </>
     );
@@ -246,6 +222,7 @@ const styles = StyleSheet.create({
     preferencesContainer: {
         padding: 10,
         alignContent: 'flex-start',
+        justifyContent: 'center',
     },
     textStyle: {
         fontFamily: 'Alphakind',

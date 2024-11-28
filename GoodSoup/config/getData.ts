@@ -13,10 +13,8 @@ export async function getUserData(userId: string): Promise<User | null> {
   
       if (snapshot.exists()) {
         const userData: User = snapshot.val();
-        console.log('User data:', userData);
         return userData; // Returning the fetched data
       } else {
-        console.log('No data available');
         return null; // If no data is available for that userId
       }
     } catch (error) {

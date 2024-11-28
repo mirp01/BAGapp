@@ -6,7 +6,7 @@ import{ useColorScheme }from '@/hooks/useColorScheme';
 import{ Audio }from 'expo-av';
 import { setUserParameter } from '@/config/setUser';
 import { testUserID } from '@/constants/testuser';
-import { ScoreModal } from '@/components/modalComponents/ScoreModal';
+import { ScoreModal } from '../components/ui/ScoreModal';
 import { Colors } from '@/constants/Colors';
 
 let currentSound: Audio.Sound | null = null;
@@ -56,7 +56,7 @@ export default function TabLayout(){
       const score = message.split(" ")[1];
       console.log(score);
       try {
-        const success = await setUserParameter(testUserID, 'score', '', Number(score));
+        await setUserParameter(testUserID, 'score', '', Number(score));
         setNewscore(score);
       } catch (e) {
         console.log("Error. ", e);

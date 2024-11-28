@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from '@/constants/Colors';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
-import { RewardModal } from '@/components/modalComponents/RewardModal';
+import { RewardModal } from '@/components/ui/RewardModal';
 import { useCalendar } from '@/hooks/useCalendar';
 import { setUserParameter } from '../../config/setUser';
 import { testUserID } from '@/constants/testuser';

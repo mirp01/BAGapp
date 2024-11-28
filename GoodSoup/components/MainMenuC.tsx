@@ -3,11 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import  ButtonPrimary from '@/components/ButtonPrimary';
 import  ButtonCoin from '@/components/ButtonCoin';
 import  Modal from '@/components/Modal';
-import  OptionButton from '@/components/OptionButtonPrimary';
-import { ProfileModalContent } from '@/components/modalComponents/ProfileContent';
-import { DailyModalContent } from '@/components/modalComponents/DailyContent';
-import { AnuncioModal } from '@/components/modalComponents/AnuncioModal';
-import { RankingModal } from '@/components/modalComponents/RankingModal';
+import { ProfileModalContent } from '@/components/ui/ProfileContent';
+import { DailyModalContent } from '@/components/ui/DailyContent';
+import { AnuncioModal } from '@/components/ui/AnuncioModal';
+import { RankingModal } from '@/components/ui/RankingModal';
 import { Colors } from '@/constants/Colors';
 import { listenUserData } from '../config/listenUser';
 
