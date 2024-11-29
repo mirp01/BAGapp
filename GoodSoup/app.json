@@ -14,16 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.pamsann.GoodSoup",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "bundleIdentifier": "com.pamsann.GoodSoup"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.pamsann.GoodSoup",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.pamsann.GoodSoup"
     },
     "web": {
       "bundler": "metro",
